@@ -1,26 +1,26 @@
-<div class="calendar-panel">
-  <div class="calendar-panel-header">
+<div class="{{prefixCls}}-panel">
+  <div class="{{prefixCls}}-panel-header">
     <div>  
       <span class="this-month">
         {{month | uppercase}} {{year}}  
       </span>
-      <span class="prev-year">⥢</span>
-      <span class="prev-month" (click)="prev()">⇽</span>
-      <span class="next-month" (click)="setMonth()">⇾</span>
-      <span class="next-year" (click)="prev()">⥤</span>
+      <span class="prev-year" (click)="jump(-12)"></span>
+      <span class="prev-month" (click)="jump(-1)"></span>
+      <span class="next-month" (click)="jump(1)"></span>
+      <span class="next-year" (click)="jump(12)"></span>
     </div>
   </div>
-  <div class="calendar-panel-body">
-    <table cellspacing="0" role="grid">
+  <div class="{{prefixCls}}-panel-body">
+    <table>
       <thead>
-        <tr role="row">
+        <tr>
           <th *ngFor="let short of weekdaysMin"><span>{{short}}</span></th>
         </tr>
       </thead>
       <tbody>
-        <tr role="row" *ngFor="let week of calendarDays">
+        <tr *ngFor="let week of calendarDays">
           <td *ngFor="let day of week">
-            <div class={{day?.className}}>{{day.date}}</div>
+            <div class={{day?.className}} (click)="select(day.date)">{{day.date}}</div>
           </td>
         </tr>
       </tbody>
